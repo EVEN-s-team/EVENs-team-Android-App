@@ -1,0 +1,8 @@
+node_modules/
+app/build/
+build/
+.gradle/
+*.apk
+*.idsig
+*.keystore
+_build_apk.js
