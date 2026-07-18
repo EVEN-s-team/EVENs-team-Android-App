@@ -22,6 +22,13 @@ const KEY_ALIAS = "evensteam";
 const KEYSTORE_PASSWORD = process.env.KEYSTORE_PASSWORD;
 const KEY_PASSWORD = process.env.KEY_PASSWORD;
 const BUILD_TOOLS_VERSION = "34.0.0";
+// Marca en la URL de arranque para que la web sepa que la peticion viene de
+// esta app y no de un navegador cualquiera (ver app.before_request en el
+// Flask). El web manifest normal no trae esto, asi que se fija a mano
+// despues de generar el TWA manifest desde el.
+const START_URL = "/?origen=app-android";
+const APP_VERSION_NAME = "2";
+const APP_VERSION_CODE = 2;
 
 if (!KEYSTORE_PASSWORD || !KEY_PASSWORD) {
     console.error("Faltan las variables de entorno KEYSTORE_PASSWORD y/o KEY_PASSWORD.");
@@ -63,6 +70,9 @@ async function main() {
     twaManifest.packageId = PACKAGE_ID;
     twaManifest.signingKey = { path: KEYSTORE_PATH, alias: KEY_ALIAS };
     twaManifest.webManifestUrl = manifestUrl;
+    twaManifest.startUrl = START_URL;
+    twaManifest.appVersionName = APP_VERSION_NAME;
+    twaManifest.appVersionCode = APP_VERSION_CODE;
 
     const err = twaManifest.validate();
     if (err) throw new Error("twa-manifest invalido: " + err);
@@ -100,10 +110,10 @@ async function main() {
         await androidSdkTools.installBuildTools();
     }
     const gradleWrapper = new GradleWrapper(process, androidSdkTools, process.cwd());
-    // NoDefaultCurrentDirectoryInExePath puede estar activado (asi lo tenemos aqui), lo
+    // NoDefaultCurrentDirectoryInExePath puede estar activado en Windows, lo
     // que hace que cmd.exe no encuentre gradlew.bat sin ruta completa. Se fuerza la ruta
     // absoluta para evitarlo, sin depender de esa configuracion del sistema.
-    gradleWrapper.gradleCmd = path.join(process.cwd(), "gradlew.bat");
+    gradleWrapper.gradleCmd = path.join(process.cwd(), process.platform === "win32" ? "gradlew.bat" : "gradlew");
     await gradleWrapper.assembleRelease();
 
     const apkBuildOutput = path.join(process.cwd(), "app", "build", "outputs", "apk", "release", "app-release-unsigned.apk");
@@ -118,7 +128,7 @@ async function main() {
     // No se usa androidSdkTools.apksigner() porque en Windows invoca java.exe via
     // shell:true, y si la ruta del JDK tiene espacios (ej. "Program Files") rompe el
     // parseo de cmd.exe. Se llama directo con execFile sin shell, que no tiene ese problema.
-    const javaExe = path.join(config.jdkPath, "bin", "java.exe");
+    const javaExe = path.join(config.jdkPath, "bin", process.platform === "win32" ? "java.exe" : "java");
     const apksignerJar = path.join(config.androidSdkPath, "build-tools", BUILD_TOOLS_VERSION, "lib", "apksigner.jar");
     await execFile(javaExe, [
         "-Xmx1024M", "-Xss1m", "-jar", apksignerJar,

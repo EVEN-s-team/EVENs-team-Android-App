@@ -12,7 +12,7 @@
   "navigationDividerColorDark": "#000000",
   "backgroundColor": "#0F1811",
   "enableNotifications": true,
-  "startUrl": "/",
+  "startUrl": "/?origen=app-android",
   "iconUrl": "https://evens-team-pagina-web-production.up.railway.app/static/img/favicon.png",
   "maskableIconUrl": "https://evens-team-pagina-web-production.up.railway.app/static/img/favicon.png",
   "splashScreenFadeOutDuration": 300,
@@ -20,8 +20,8 @@
     "path": "./android.keystore",
     "alias": "evensteam"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "2",
+  "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "unknown",
   "webManifestUrl": "https://evens-team-pagina-web-production.up.railway.app/static/manifest.json",
@@ -43,5 +43,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1"
+  "appVersion": "2"
 }
