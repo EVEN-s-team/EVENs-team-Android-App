@@ -6,3 +6,17 @@ build/
 *.idsig
 *.keystore
 _build_apk.js
+
+# Proyecto Android/Gradle: bubblewrap lo regenera entero cada build a partir
+# de twa-manifest.json, asi que no se versiona (solo el codigo Java propio
+# en app/src/main/java/ se mantiene, ese si es de verdad "codigo del repo").
+gradle/
+gradlew
+gradlew.bat
+build.gradle
+app/build.gradle
+settings.gradle
+gradle.properties
+app/src/main/AndroidManifest.xml
+app/src/main/res/
+store_icon.png
