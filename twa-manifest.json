@@ -20,8 +20,8 @@
     "path": "./android.keystore",
     "alias": "evensteam"
   },
-  "appVersionName": "2",
-  "appVersionCode": 2,
+  "appVersionName": "0.0.1",
+  "appVersionCode": 1,
   "shortcuts": [],
   "generatorApp": "unknown",
   "webManifestUrl": "https://evens-team-pagina-web-production.up.railway.app/static/manifest.json",
@@ -43,5 +43,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "2"
+  "appVersion": "0.0.1"
 }

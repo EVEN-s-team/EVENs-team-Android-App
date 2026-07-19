@@ -27,8 +27,8 @@ const BUILD_TOOLS_VERSION = "34.0.0";
 // Flask). El web manifest normal no trae esto, asi que se fija a mano
 // despues de generar el TWA manifest desde el.
 const START_URL = "/?origen=app-android";
-const APP_VERSION_NAME = "2";
-const APP_VERSION_CODE = 2;
+const APP_VERSION_NAME = "0.0.1";
+const APP_VERSION_CODE = 1;
 
 if (!KEYSTORE_PASSWORD || !KEY_PASSWORD) {
     console.error("Faltan las variables de entorno KEYSTORE_PASSWORD y/o KEY_PASSWORD.");
