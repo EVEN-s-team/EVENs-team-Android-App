@@ -20,3 +20,18 @@ gradle.properties
 app/src/main/AndroidManifest.xml
 app/src/main/res/
 store_icon.png
+
+# --- Secretos: NUNCA subir nada de esto a un repo (publico o privado) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets.json
+credentials.json
+service-account*.json
+*.token
